@@ -24,8 +24,14 @@
 ![関数のプロット](funcplot.png)
 
 ```gnuplot {cmd=true output="html"}
+set title "関数のプロット"
 set terminal svg
-
+set xlabel "x"
+set ylabel "y"
+set grid
+set xrange [0:7]
+set yrange [-20:15]
+plot (2*x*x)*sqrt(x)-5*x*x with lines title "f1(x)",(x)/log(x) with lines title "f2(x)"
 ```
 
 ## 3. 八王子の気温
@@ -46,6 +52,12 @@ set terminal svg
 set xdata time
 set timefmt '%Y/%m/%d'
 set xtics format "%m/%d"
+set grid
+set ylabel "温度"
+set xlabel "日付"
+set title "八王子の気温（過去１年間）"
+set datafile separator comma
+plot "weather2025.csv" using 1:2 w l t "最高気温","weather2025.csv" using 1:3 w l t "最高気温（平年）","weather2025.csv" using 1:4 w l t "最低気温","weather2025.csv" using 1:5 w l t "最低気温（平年）"
 
 ```
 
@@ -64,8 +76,17 @@ set xtics format "%m/%d"
 - 格子状の補助線を入れる
 
 ```gnuplot {cmd=true, output="html"}
+
 set terminal svg
 unset key
+set style fill solid
+set yrange [0:16]
+set grid
+set boxwidth 0.6
+set title "誕生日の月別人数"
+set ylabel "人" offset graph 0,0.5 rotate by 0
+plot "bm.txt" using 1:2:xtic(1) with boxes linecolor "skyblue"
+
 
 
 ```
